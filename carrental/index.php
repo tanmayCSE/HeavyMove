@@ -2,17 +2,14 @@
 session_start();
 include('includes/config.php');
 error_reporting(0);
+
 ?>
 
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<title>Truck Rental Portal</title>
+
+<title>Vehicle Hiring Portal</title>
 <!--Bootstrap -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="assets/css/style.css" type="text/css">
@@ -21,6 +18,13 @@ error_reporting(0);
 <link href="assets/css/slick.css" rel="stylesheet">
 <link href="assets/css/bootstrap-slider.min.css" rel="stylesheet">
 <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" id="switcher-css" type="text/css" href="assets/switcher/css/switcher.css" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/red.css" title="red" media="all" data-default-color="true" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/orange.css" title="orange" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/blue.css" title="blue" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/pink.css" title="pink" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/green.css" title="green" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/purple.css" title="purple" media="all" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
@@ -30,6 +34,10 @@ error_reporting(0);
 </head>
 <body>
 
+<!-- Start Switcher -->
+<?php include('includes/colorswitcher.php');?>
+<!-- /Switcher -->  
+        
 <!--Header-->
 <?php include('includes/header.php');?>
 <!-- /Header --> 
@@ -41,9 +49,9 @@ error_reporting(0);
       <div class="row">
         <div class="col-md-5 col-md-push-7">
           <div class="banner_content">
-            <h1>Find the ideal Truck for you.</h1>
-            <p>We have more trucks for you to choose. </p>
-          </div>
+            <h1>&nbsp;</h1>
+            <p>&nbsp; </p>
+            </div>
         </div>
       </div>
     </div>
@@ -56,55 +64,52 @@ error_reporting(0);
 <section class="section-padding gray-bg">
   <div class="container">
     <div class="section-header text-center">
-      <h2>Find the Best <span>Truck For You</span></h2>
-      <p>It is above all the uncompromising, performance-oriented aesthetic that unmistakeably reveals its ambitions. Not elegant but extravagant. Not conventional but individual.</p>
+      <h2>Find the Best <span>VehicleForYou</span></h2>
+      <p>Our platform offers a diverse selection of robust vehicles, available in various sizes, to perfectly suit your requirements for tasks like relocating homes, serving corporate needs, or supporting marketplace operations.</p>
     </div>
     <div class="row"> 
       
       <!-- Nav tabs -->
       <div class="recent-tab">
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#resentnewcar" role="tab" data-toggle="tab">New Truck</a></li>
+          <li role="presentation" class="active"><a href="#resentnewcar" role="tab" data-toggle="tab">Vehicles We Provide</a></li>
         </ul>
       </div>
-      <!-- Recently Listed New Trucks -->
+      <!-- Recently Listed New Cars -->
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="resentnewcar">
-          <div class="row">
-            <?php
-            $sql = "SELECT tblvehicles.VehiclesTitle, tblbrands.BrandName, tblvehicles.PricePerDay, tblvehicles.FuelType, tblvehicles.ModelYear, tblvehicles.id, tblvehicles.SeatingCapacity, tblvehicles.VehiclesOverview, tblvehicles.Vimage1 FROM tblvehicles JOIN tblbrands ON tblbrands.id=tblvehicles.VehiclesBrand";
-            $query = $dbh->prepare($sql);
-            $query->execute();
-            $results = $query->fetchAll(PDO::FETCH_OBJ);
-            $cnt = 1;
-            if ($query->rowCount() > 0) {
-              foreach ($results as $result) {
-            ?>
-                <div class="col-list-3">
-                  <div class="recent-car-list">
-                    <div class="car-info-box">
-                      <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id); ?>"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1); ?>" class="img-responsive" alt="image"></a>
-                      <ul>
-                        <li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($result->FuelType); ?></li>
-                        <li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($result->ModelYear); ?> Model</li>
-                        <li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($result->SeatingCapacity); ?> seats</li>
-                      </ul>
-                    </div>
-                    <div class="car-title-m">
-                      <h6><a href="vehical-details.php?vhid=<?php echo htmlentities($result->id); ?>"><?php echo htmlentities($result->BrandName); ?>, <?php echo htmlentities($result->VehiclesTitle); ?></a></h6>
-                      <span class="price">$<?php echo htmlentities($result->PricePerDay); ?> /Day</span>
-                    </div>
-                    <div class="inventory_info_m">
-                      <p><?php echo substr($result->VehiclesOverview, 0, 70); ?></p>
-                    </div>
-                  </div>
-                </div>
-            <?php
-              }
-            }
-            ?>
-          </div>
-        </div>
+
+<?php $sql = "SELECT tblvehicles.VehiclesTitle,tblbrands.BrandName,tblvehicles.PricePerDay,tblvehicles.FuelType,tblvehicles.ModelYear,tblvehicles.id,tblvehicles.SeatingCapacity,tblvehicles.VehiclesOverview,tblvehicles.Vimage1 from tblvehicles join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand limit 9";
+$query = $dbh -> prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $result)
+{  
+?>  
+
+<div class="col-list-3">
+<div class="recent-car-list">
+<div class="car-info-box"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" class="img-responsive" alt="image"></a>
+<ul>
+<li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($result->FuelType);?></li>
+<li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($result->ModelYear);?> Model</li>
+<li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($result->SeatingCapacity);?> seats</li>
+</ul>
+</div>
+<div class="car-title-m">
+<h6><a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"> <?php echo htmlentities($result->VehiclesTitle);?></a></h6>
+<span class="price">৳<?php echo htmlentities($result->PricePerDay);?> /Hour</span>
+</div>
+<div class="inventory_info_m">
+<p><?php echo substr($result->VehiclesOverview,0,70);?></p>
+</div>
+</div>
+</div>
+<?php }}?>
+       
       </div>
     </div>
   </div>
@@ -127,7 +132,7 @@ error_reporting(0);
         <div class="fun-facts-m">
           <div class="cell">
             <h2><i class="fa fa-car" aria-hidden="true"></i>1200+</h2>
-            <p>New Trucks For Sale</p>
+            <p>New Vehicles For Sale</p>
           </div>
         </div>
       </div>
@@ -135,7 +140,7 @@ error_reporting(0);
         <div class="fun-facts-m">
           <div class="cell">
             <h2><i class="fa fa-car" aria-hidden="true"></i>1000+</h2>
-            <p>Used Trucks For Sale</p>
+            <p>Used Vehicles For Sale</p>
           </div>
         </div>
       </div>
@@ -163,30 +168,33 @@ error_reporting(0);
     </div>
     <div class="row">
       <div id="testimonial-slider">
-        <?php 
-        $tid = 1;
-        $sql = "SELECT tbltestimonial.Testimonial, tblusers.FullName FROM tbltestimonial JOIN tblusers ON tbltestimonial.UserEmail=tblusers.EmailId WHERE tbltestimonial.status=:tid";
-        $query = $dbh->prepare($sql);
-        $query->bindParam(':tid', $tid, PDO::PARAM_STR);
-        $query->execute();
-        $results = $query->fetchAll(PDO::FETCH_OBJ);
-        $cnt = 1;
-        if ($query->rowCount() > 0) {
-          foreach ($results as $result) {
-        ?>
-            <div class="testimonial-m">
-              <div class="testimonial-img"> <img src="assets/images/cat-profile.png" alt="" /> </div>
-              <div class="testimonial-content">
-                <div class="testimonial-heading">
-                  <h5><?php echo htmlentities($result->FullName); ?></h5>
-                  <p><?php echo htmlentities($result->Testimonial); ?></p>
-                </div>
-              </div>
-            </div>
-        <?php
-          }
-        }
-        ?>
+<?php 
+$tid=2;
+$sql = "SELECT tbltestimonial.Testimonial,tblusers.FullName from tbltestimonial join tblusers on tbltestimonial.UserEmail=tblusers.EmailId where tbltestimonial.status=:tid limit 4";
+$query = $dbh -> prepare($sql);
+$query->bindParam(':tid',$tid, PDO::PARAM_STR);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $result)
+{  ?>
+
+
+        <div class="testimonial-m">
+ 
+          <div class="testimonial-content">
+            <div class="testimonial-heading">
+              <h5><?php echo htmlentities($result->FullName);?></h5>
+            <p><?php echo htmlentities($result->Testimonial);?></p>
+          </div>
+        </div>
+        </div>
+        <?php }} ?>
+        
+       
+  
       </div>
     </div>
   </div>
@@ -230,4 +238,6 @@ error_reporting(0);
 <script src="assets/js/owl.carousel.min.js"></script>
 
 </body>
+
+<!-- Mirrored from themes.webmasterdriver.net/carforyou/demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Jun 2017 07:22:11 GMT -->
 </html>

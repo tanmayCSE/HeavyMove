@@ -49,7 +49,7 @@ $msg="Booking Successfully Confirmed";
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 	
-	<title>Car Rental Portal |Admin Manage testimonials   </title>
+	<title>Vehicle Booking Portal |Admin Manage testimonials   </title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -115,6 +115,7 @@ $msg="Booking Successfully Confirmed";
 											<th>Vehicle</th>
 											<th>From Date</th>
 											<th>To Date</th>
+											<th>Hours</th>
 											<th>Message</th>
 											<th>Status</th>
 											<th>Posting date</th>
@@ -128,6 +129,7 @@ $msg="Booking Successfully Confirmed";
 											<th>Vehicle</th>
 											<th>From Date</th>
 											<th>To Date</th>
+											<th>Hours</th>
 											<th>Message</th>
 											<th>Status</th>
 											<th>Posting date</th>
@@ -136,7 +138,7 @@ $msg="Booking Successfully Confirmed";
 									</tfoot>
 									<tbody>
 
-									<?php $sql = "SELECT tblusers.FullName,tblbrands.BrandName,tblvehicles.VehiclesTitle,tblbooking.FromDate,tblbooking.ToDate,tblbooking.message,tblbooking.VehicleId as vid,tblbooking.Status,tblbooking.PostingDate,tblbooking.id  from tblbooking join tblvehicles on tblvehicles.id=tblbooking.VehicleId join tblusers on tblusers.EmailId=tblbooking.userEmail join tblbrands on tblvehicles.VehiclesBrand=tblbrands.id  ";
+									<?php $sql = "SELECT tblusers.FullName,tblbrands.BrandName,tblvehicles.VehiclesTitle,tblbooking.FromDate,tblbooking.ToDate,tblbooking.Hours,tblbooking.message,tblbooking.VehicleId as vid,tblbooking.Status,tblbooking.PostingDate,tblbooking.id  from tblbooking join tblvehicles on tblvehicles.id=tblbooking.VehicleId join tblusers on tblusers.EmailId=tblbooking.userEmail join tblbrands on tblvehicles.VehiclesBrand=tblbrands.id  ";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -151,6 +153,7 @@ foreach($results as $result)
 											<td><a href="edit-vehicle.php?id=<?php echo htmlentities($result->vid);?>"><?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></td>
 											<td><?php echo htmlentities($result->FromDate);?></td>
 											<td><?php echo htmlentities($result->ToDate);?></td>
+											<td><?php echo htmlentities($result->Hours);?></td>
 											<td><?php echo htmlentities($result->message);?></td>
 											<td><?php 
 if($result->Status==0)
