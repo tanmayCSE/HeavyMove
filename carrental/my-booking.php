@@ -8,7 +8,7 @@ header('location:index.php');
 }
 else{
 ?><!DOCTYPE HTML>
-<html lang="en">
+<html lang="en"
 <head>
 
 <title>Vehicle Hiring Portal - My Booking</title>

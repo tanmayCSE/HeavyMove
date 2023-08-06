@@ -409,7 +409,7 @@ ALTER TABLE `tblbooking` ADD `Hours` INT(30) NOT NULL AFTER `ToDate`;
 ALTER TABLE `tblbooking` ADD `PickAddress` varchar(100) NOT NULL AFTER `Hours`;
 ALTER TABLE `tblbooking` ADD `DropAddress` varchar(100) NOT NULL AFTER `PickAddress`;
 ALTER TABLE `tblbooking` ADD `Labour` INT(30) NOT NULL AFTER `DropAddress`;
-
+ALTER TABLE `tblvehicles` Modify column `SeatingCapacity` varchar(20);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
