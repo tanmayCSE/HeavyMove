@@ -1,1 +1,1 @@
-
+HeavyMove is a comprehensive web platform designed for seamless heavy vehicle rentals and labor booking through an intuitive user interface, fortified backend security, and robust administrative controls, all developed utilizing PHP, MySQL, HTML, CSS, and JavaScript.
